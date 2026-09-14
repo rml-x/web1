@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Adicionar Aluno</title>
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
 
@@ -23,6 +24,9 @@ echo "<h1>Adicionar Aluno</h1>";
 
     <input type="submit" value="Adicionar">
 </form>
+<a href="../../index.php">Voltar ao Menu</a>
+<br>
+<a href='listar.php'>Voltar para a lista de Alunos</a>
 
 <?php
 

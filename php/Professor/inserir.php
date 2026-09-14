@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Adicionar Professor</title>
+    <link rel="stylesheet" href="../../css/style.css">
+
 </head>
 <body>
 
@@ -16,19 +18,26 @@ echo "<h1>Adicionar Professor</h1>";
     <input type="text" name="nome" required><br><br>
 
     <label for="dia_de_atendimento">Dia de Atendimento</label>
-        <select id="dia_de_atendimento" name="dia_de_atendimento">
-            <option value="segunda">Segunda</option>
-            <option value="terca">Terça</option>
-            <option value="quarta">Quarta</option>
-            <option value="quinta">Quinta</option>
-            <option value="sexta">Sexta</option>
-        </select>
+        <select id="dia_de_atendimento" name="dia_de_atendimento" required>
+            <option value="Segunda">Segunda</option>
+            <option value="Terça">Terça</option>
+            <option value="Quarta">Quarta</option>
+            <option value="Quinta">Quinta</option>
+            <option value="Sexta">Sexta</option>
+            <option value="Sábado">Sábado</option>
+            <option value="Domingo">Domingo</option>
+        </select><br><br>
 
     <label for="email">Email:</label>
     <input type="text" name="email" required><br><br>
 
     <input type="submit" value="Adicionar">
 </form>
+
+<a href="../../index.php">Voltar ao Menu</a>
+<br>
+<a href='listar.php'>Voltar para a lista de Professores</a>
+
 
 <?php
 

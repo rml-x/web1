@@ -67,7 +67,7 @@ CREATE TABLE `Faz` (
 CREATE TABLE `Professor` (
   `id` int NOT NULL,
   `nome` varchar(255) NOT NULL,
-  `dia_de_atendimento` date NOT NULL,
+  `dia_de_atendimento` dayofweek NOT NULL,
   `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -140,6 +140,9 @@ ALTER TABLE `Disciplina`
 ALTER TABLE `Faz`
   ADD CONSTRAINT `Faz_ibfk_1` FOREIGN KEY (`matricula_aluno`) REFERENCES `Aluno` (`matricula`),
   ADD CONSTRAINT `Faz_ibfk_2` FOREIGN KEY (`id_disciplina`) REFERENCES `Disciplina` (`id`);
+
+ALTER TABLE `Professor` 
+  MODIFY `dia_de_atendimento` ENUM('Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo') NOT NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
