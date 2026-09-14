@@ -1,6 +1,11 @@
-
-<link rel="stylesheet" href="../../css/style.css">
-
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Matrícula</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
 
 <?php
 require_once __DIR__ . '/../conexao.php';
@@ -8,22 +13,26 @@ require_once __DIR__ . '/../conexao.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
     $id = $_POST["id"];
 
-    $sql = "DELETE FROM Professor WHERE id = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    $result = mysqli_stmt_execute($stmt);
+    try {
+        $sql = "DELETE FROM Faz WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
 
-    if ($result) {
-        echo "Professor excluído com sucesso!";
-        echo "<br>Obs: disciplinas que tinham este professor ficaram sem professor (ON DELETE SET NULL).";
-    } else {
-        echo "Erro ao excluir Professor: " . mysqli_error($conn);
+        echo "<p class='mensagem-sucesso'>Matrícula excluída com sucesso!</p>";
+
+        mysqli_stmt_close($stmt);
+
+    } catch (mysqli_sql_exception $e) {
+        echo "<p class='mensagem-erro'>Erro ao excluir Matrícula: " . htmlspecialchars($e->getMessage()) . "</p>";
     }
 
-    mysqli_stmt_close($stmt);
 } else {
-    echo "Requisição inválida.";
+    echo "<p class='mensagem-erro'>Requisição inválida.</p>";
 }
 ?>
 
-<br><a href="listar.php">Voltar para a lista de Professores</a>
+<br><a href="listar.php" class="btn-link">Voltar para a lista de Matrículas</a>
+
+</body>
+</html>

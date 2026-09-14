@@ -37,6 +37,7 @@ echo "<h1>Adicionar Professor</h1>";
 <a href="../../index.php">Voltar ao Menu</a>
 <br>
 <a href='listar.php'>Voltar para a lista de Professores</a>
+<br>
 
 
 <?php
@@ -56,7 +57,6 @@ echo "<h1>Adicionar Professor</h1>";
 
         if ($result) {
             echo "Professor adicionado com sucesso!";
-            echo "<br><a href='listar.php'>Voltar para a lista de Professores</a>";
         } else {
             echo "Erro ao adicionar Professor: " . mysqli_error($conn);
         }

@@ -44,6 +44,7 @@ $disciplinas = mysqli_query($conn, "SELECT id, nome FROM Disciplina ORDER BY nom
 </form>
 
 <a href="../../index.php">Voltar ao Menu</a>
+<br>
 
 <?php
 
@@ -68,7 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($result) {
             echo "Matrícula realizada com sucesso!";
-            echo "<br><a href='listar.php'>Voltar para a lista de Matrículas</a>";
         } else {
             echo "Erro ao matricular: " . mysqli_error($conn);
         }

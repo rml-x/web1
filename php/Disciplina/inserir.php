@@ -12,10 +12,9 @@ echo "<h1>Adicionar Disciplina</h1>";
 ?>
 
 <?php
-// Ajuste o caminho conforme a pasta onde este arquivo estiver
 require_once __DIR__ . '/../conexao.php';
 
-// Busca os professores pra popular o select (opcional na criação)
+//query para o form
 $professores = mysqli_query($conn, "SELECT id, nome FROM Professor ORDER BY nome");
 ?>
 
@@ -43,6 +42,7 @@ $professores = mysqli_query($conn, "SELECT id, nome FROM Professor ORDER BY nome
 <a href="../../index.php">Voltar ao Menu</a>
 <br>
 <a href='listar.php'>Voltar para a lista de Disciplinas</a>
+<br>
 
 <?php
 
@@ -52,7 +52,6 @@ $professores = mysqli_query($conn, "SELECT id, nome FROM Professor ORDER BY nome
         // Se nenhum professor for escolhido, salva como NULL (campo é DEFAULT NULL)
         $id_professor = !empty($_POST["id_professor"]) ? $_POST["id_professor"] : null;
 
-        // Prepared statement - evita SQL Injection
         $sql = "INSERT INTO Disciplina (nome, sala, id_professor) VALUES (?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "ssi", $nome, $sala, $id_professor);
@@ -60,7 +59,6 @@ $professores = mysqli_query($conn, "SELECT id, nome FROM Professor ORDER BY nome
 
         if ($result) {
             echo "Disciplina adicionada com sucesso!";
-            echo "<br><a href='listar.php'>Voltar para a lista de Disciplinas</a>";
         } else {
             echo "Erro ao adicionar Disciplina: " . mysqli_error($conn);
         }

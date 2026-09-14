@@ -25,7 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result) {
         echo "Professor atualizado com sucesso!";
-        echo "<br><a href='listar.php'>Voltar para a lista de Professores</a>";
     } else {
         echo "Erro ao atualizar Professor: " . mysqli_error($conn);
     }

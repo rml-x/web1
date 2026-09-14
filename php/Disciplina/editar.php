@@ -25,7 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result) {
         echo "Disciplina atualizada com sucesso!";
-        echo "<br><a href='listar.php'>Voltar para a lista de Disciplinas</a>";
     } else {
         echo "Erro ao atualizar Disciplina: " . mysqli_error($conn);
     }

@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($result) {
             echo "Matrícula atualizada com sucesso!";
-            echo "<br><a href='listar.php'>Voltar para a lista de Matrículas</a>";
         } else {
             echo "Erro ao atualizar Matrícula: " . mysqli_error($conn);
         }

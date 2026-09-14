@@ -1,5 +1,11 @@
-
-<link rel="stylesheet" href="../../css/style.css">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Disciplina</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
 
 <?php
 require_once __DIR__ . '/../conexao.php';
@@ -7,23 +13,31 @@ require_once __DIR__ . '/../conexao.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
     $id = $_POST["id"];
 
-    $sql = "DELETE FROM Disciplina WHERE id = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    $result = mysqli_stmt_execute($stmt);
+    try {
+        $sql = "DELETE FROM Disciplina WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
 
-    if ($result) {
-        echo "Disciplina excluída com sucesso!";
-    } else {
-        // Erro comum aqui: existem matrículas (Faz) apontando pra essa disciplina
-        echo "Erro ao excluir Disciplina: " . mysqli_error($conn);
-        echo "<br>Dica: exclua primeiro as matrículas (Faz) ligadas a esta disciplina.";
+        echo "<p class='mensagem-sucesso'>Disciplina excluída com sucesso!</p>";
+
+        mysqli_stmt_close($stmt);
+
+    } catch (mysqli_sql_exception $e) {
+        if ($e->getCode() == 1451) {
+            echo "<p class='mensagem-erro'>Não é possível excluir esta disciplina: existem alunos matriculados nela.</p>";
+            echo "<p>Exclua primeiro as matrículas ligadas a esta disciplina na tela de Matrículas.</p>";
+        } else {
+            echo "<p class='mensagem-erro'>Erro ao excluir Disciplina: " . htmlspecialchars($e->getMessage()) . "</p>";
+        }
     }
 
-    mysqli_stmt_close($stmt);
 } else {
-    echo "Requisição inválida.";
+    echo "<p class='mensagem-erro'>Requisição inválida.</p>";
 }
 ?>
 
-<br><a href="listar.php">Voltar para a lista de Disciplinas</a>
+<br><a href="listar.php" class="btn-link">Voltar para a lista de Disciplinas</a>
+
+</body>
+</html>
